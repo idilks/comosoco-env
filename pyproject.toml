@@ -16,14 +16,14 @@ dependencies = [
     "toml>=0.10.2",
     "pyyaml>=6.0.2",
     ### linting ###
-    "ruff>=0.8.4",
+    "ruff>=0.8.6",
     ### scientific computing ###
     "numpy>=2.0.2",
     "optype[numpy]>=0.7.3",
     "pandas>=2.2.3",
     "pandas-stubs>=2.2.3.241126",
-    "scipy>=1.14.1",
-    "scipy-stubs>=1.14.1.6",
+    "scipy>=1.15.0",
+    "scipy-stubs>=1.15.0.0",
     "scikit-learn>=1.6.0",
     # "statsmodels>=0.14.4",
     # "torch==2.5.1+cu124 ; platform_system != 'Darwin'",
@@ -39,7 +39,7 @@ dependencies = [
     ### memo ###
     "jax>=0.4.36",
     "memo-lang>=0.4.5",
-    "xarray>=2024.11.0",
+    "xarray>=2025.1.0",
     "graphviz>=0.20.3",
 ]
 
