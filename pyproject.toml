@@ -38,7 +38,7 @@ dependencies = [
     # "pre-commit>=4.0.1",
     ### memo ###
     "jax>=0.4.36",
-    "memo-lang>=0.4.5",
+    "memo-lang>=0.4.6",
     "xarray>=2025.1.0",
     "graphviz>=0.20.3",
 ]
