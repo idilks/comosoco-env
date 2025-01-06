@@ -1,0 +1,38 @@
+#########
+### specialized ignore patterns ###
+#########
+**/*-gitignore*
+**/*_gitignore*
+
+#########
+### generated directories ###
+#########
+**/.ruff/
+**/.venv/
+**/.ipynb_checkpoints/
+**/__pycache__/
+.task/
+**/*.egg-info
+
+#########
+### generated files ###
+#########
+# *.lock
+# *-lock.*
+**/Untitled*.ipynb
+_prior_environments
+
+#########
+### editor config ###
+#########
+
+#########
+### important ###
+#########
+.env
+
+#########
+### project specific patterns ###
+#########
+
+

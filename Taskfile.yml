@@ -1,0 +1,137 @@
+version: '3'
+
+vars:
+  VENV_DIR: '.venv'
+  PRIOR_ENV_LOCKS_DIR: '_prior_environments'
+  SRC_DIR: 'comosoco'
+
+tasks:
+  check-installable:
+    internal: true
+    preconditions:
+      - test -f "pyproject.toml"
+
+  check-install:
+    internal: true
+    vars:
+      VENV_ACTIVATE: '{{joinPath .VENV_DIR "bin" "activate"}}'
+    preconditions:
+      - test -f "pyproject.toml"
+      - test -f "uv.lock"
+      - test -d "{{.VENV_DIR}}"
+      - test -f "{{.VENV_ACTIVATE}}"
+
+  run-zsh:
+    aliases: [shell, zsh]
+    internal: true
+    deps: [check-install]
+    vars:
+      VENV_ACTIVATE: '{{joinPath .VENV_DIR "bin" "activate"}}'
+    cmds:
+      - >
+        zsh -i -c 'source "{{.VENV_ACTIVATE}}" && {{.VENV_CMD}}'
+    preconditions:
+      - test -f "{{.VENV_ACTIVATE}}"
+
+  debug-which-python:
+    cmds:
+      - task: run-zsh
+        vars:
+          VENV_CMD: 'which python'
+
+  update:
+    aliases: [update-deps, env-update, env-update-deps]
+    deps: [check-install]
+    cmds:
+      - cmd: rm "uv.lock"
+        ignore_error: true
+      - uv lock --upgrade
+      - uv sync
+      # - uv sync --upgrade
+
+  scrub:
+    aliases: [env-scrub, env-clean]
+    desc: Clean python virtual environment by removing specified files and folders
+    vars:
+      RMLIST: [
+          ### Files ###
+          'uv.lock',
+          'conda-lock.yml',
+          'conda-*.lock',
+          'requirements.txt',
+          'requirements*.txt',
+          ### Folders ###
+          '{{.VENV_DIR}}',
+          '.venv',
+          '.ruff_cache',
+          '.task',
+        ]
+      DYNAMIC_PATTERNS: [
+        '*.egg-info',
+        '.jupyter_cache',
+        '__pycache__',
+        '.ipynb_checkpoints',
+      ]
+    ignore_error: true
+    silent: true
+    cmds:
+      - for:
+          var: RMLIST
+        cmd: |
+          if [ -f "{{.ITEM}}" ]; then
+            rm "{{.ITEM}}"
+          elif [ -d "{{.ITEM}}" ]; then
+            rm -r "{{.ITEM}}"
+          fi
+      - for:
+          var: DYNAMIC_PATTERNS
+        cmd: |
+          echo "Searching and removing directories matching '{{.ITEM}}'"
+          find "{{.ROOT_DIR}}" -type d -name "{{.ITEM}}" -exec rm -r {} +
+
+  install:
+    aliases: [env-install]
+    deps: [check-installable]
+    prompt: Install python virtual env (will overwrite any existing env)?
+    vars:
+      DATE_STR_DEFAULT: '$(date +%Y-%m-%d)'
+      DATE_STR: '{{default .DATE_STR_DEFAULT .DATE_STR}}'
+      FNAME_PYPROJECTCOPY: 'pyproject-{{.DATE_STR}}.toml'
+      FNAME_UVLOCK: 'uv-{{.DATE_STR}}.lock'
+      FNAME_PIPFREEZE: 'requirements-{{.DATE_STR}}.txt'
+      PATH_ENVLOCKS: '{{joinPath .ROOT_DIR .PRIOR_ENV_LOCKS_DIR}}'
+      PATH_PYPROJECTCOPY: '{{joinPath .PATH_ENVLOCKS .FNAME_PYPROJECTCOPY}}'
+      PATH_UVLOCK: '{{joinPath .PATH_ENVLOCKS .FNAME_UVLOCK}}'
+      PATH_PIPFREEZE: '{{joinPath .PATH_ENVLOCKS .FNAME_PIPFREEZE}}'
+      RMLIST: [
+        "{{.PATH_PYPROJECTCOPY}}",
+        "{{.PATH_UVLOCK}}",
+        "{{.PATH_PIPFREEZE}}",
+      ]
+      DYNAMIC_PATTERNS: [
+        '*.egg-info',
+      ]
+    cmds:
+      - task: scrub
+      - for: {var: RMLIST}
+        cmd: |
+          echo "looking for {{.ITEM}}"
+          if [ -f "{{.ITEM}}" ]; then
+            echo "removing {{.ITEM}}"
+            rm "{{.ITEM}}"
+          elif [ -d "{{.ITEM}}" ]; then
+            echo "WARNING: {{.ITEM}} found is dir (and it should not be)!"
+          fi
+        silent: true
+      - uv sync
+      - cmd: mkdir -p "{{.PATH_ENVLOCKS}}"
+        silent: true
+      - cp "pyproject.toml" "{{.PATH_PYPROJECTCOPY}}"
+      - cp "uv.lock" "{{.PATH_UVLOCK}}"
+      - task: run-zsh 
+        vars:
+          VENV_CMD: "uv pip list --format=freeze > '{{.PATH_PIPFREEZE}}'" ### Has to be called using `run-zsh` because `uv pip list` uses the active python env
+      - for:
+          var: DYNAMIC_PATTERNS
+        cmd: |
+          find "{{.ROOT_DIR}}" -type d -name "{{.ITEM}}" -exec rm -r {} +

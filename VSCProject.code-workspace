@@ -1,0 +1,46 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "window.title": "comosoco",
+    "python.languageServer": "Pylance",
+    "python.analysis.diagnosticMode": "workspace",
+    // "python.envFile": "${workspaceFolder}/.env",
+    "jupyter.interactiveWindow.creationMode": "single",
+    "jupyter.interactiveWindow.cellMarker.decorateCells": "allCells",
+    "editor.formatOnSave": true,
+    "[python]": {
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+      }
+    },
+    "files.exclude": {
+      ".venv": true,
+      "_prior_environments": true,
+      "**/*.lock": true,
+      "**/*.egg-info": true
+    },
+    "search.exclude": {
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "bmalehorn.shell-syntax",
+      "charliermarsh.ruff",
+      "ms-python.debugpy",
+      "ms-python.pylint",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-toolsai.jupyter",
+      "njqdev.vscode-python-typehint",
+      "tamasfe.even-better-toml",
+      "task.vscode-task"
+    ]
+  }
+}

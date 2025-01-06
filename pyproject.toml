@@ -1,0 +1,163 @@
+[project]
+
+name = "comosoco"
+authors = [{name = "Sean Dae Houlihan", email = "dae.houlihan@dartmouth.edu"}]
+description = "template environment for the course"
+license = {text = "MIT"}
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    ### interactive kernel ###
+    "ipykernel>=6.29.5",
+    "jupyterlab>=4.3.4",
+    ### i/o ###
+    "python-dotenv>=1.0.1",
+    "toml>=0.10.2",
+    "pyyaml>=6.0.2",
+    ### linting ###
+    "ruff>=0.8.4",
+    ### scientific computing ###
+    "numpy>=2.0.2",
+    "optype[numpy]>=0.7.3",
+    "pandas>=2.2.3",
+    "pandas-stubs>=2.2.3.241126",
+    "scipy>=1.14.1",
+    "scipy-stubs>=1.14.1.6",
+    "scikit-learn>=1.6.0",
+    # "statsmodels>=0.14.4",
+    # "torch==2.5.1+cu124 ; platform_system != 'Darwin'",
+    # "torch==2.5.1, !=2.5.1+cpu ; platform_system == 'Darwin'",
+    # "bayesian-optimization>=2.0.0",
+    "pydantic>=2.10.4",
+    "tqdm>=4.67.1",
+    ### plotting ###
+    "matplotlib>=3.10.0",
+    "seaborn>=0.13.2",
+    ### publishing ###
+    # "pre-commit>=4.0.1",
+    ### memo ###
+    "jax>=0.4.36",
+    "memo-lang>=0.4.5",
+    "xarray>=2024.11.0",
+    "graphviz>=0.20.3",
+]
+
+# [project.urls]
+# Homepage = "https://github.com/daeh/comosoco#README.md"
+# Repository = "https://github.com/daeh/comosoco"
+# Documentation = "https://daeh.github.io//"
+# Issues = ""
+
+[tool.setuptools.packages.find]
+where = ["comosoco"]  # list of folders that contain the packages (["."] by default)
+### include = ["my_package*"]  # package names should match these glob patterns (["*"] by default)
+### exclude = ["my_package.tests*"]  # exclude packages matching these glob patterns (empty by default)
+### namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
+
+# [tool.setuptools.dynamic]
+# version = {attr = "src.__version__"}
+
+[tool.ruff]
+line-length = 120
+fix = true
+
+exclude = [
+    "**/.git",
+    "**/.vscode",
+    "**/.venv",
+    "**/.ipynb_checkpoints",
+    "**/.jupyter_cache",
+    "**/.ipynb_checkpoints",
+    "**/.ruff_cache",
+    "**/__pypackages__",
+    "**/__pycache__",
+    "**/comosoco",
+]
+
+
+[tool.pylint.messages_control]
+
+enable = [
+    "redefined-builtin",
+    "unused-wildcard-import",
+]
+disable = [
+    "unused-import",
+    "import-outside-toplevel",
+    "wrong-import-order ",
+    "wrong-import-position",
+    "line-too-long",
+    "trailing-whitespace",
+    "invalid-name",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "pointless-string-statement",
+    "pointless-statement",
+    "too-many-arguments",
+    "too-many-locals",
+    "too-many-statements",
+    "f-string-without-interpolation",
+    "broad-exception-caught",
+    "broad-exception-raised",
+    "unused-variable",
+    "use-list-literal",
+    "use-dict-literal",
+    "fixme",
+    "logging-fstring-interpolation",
+    ### memo ###
+    "redefined-outer-name",
+    "undefined-variable",
+    "used-before-assignment",
+]
+
+
+
+[tool.pyright]
+root = ["comosoco"]
+include = [
+]
+exclude = [
+    "**/.git",
+    "**/.vscode",
+    "**/.venv",
+    "**/.ipynb_checkpoints",
+    "**/.jupyter_cache",
+    "**/.ipynb_checkpoints",
+    "**/.ruff_cache",
+    "**/__pypackages__",
+    "**/__pycache__",
+]
+ignore = ["comosoco"]
+# defineConstant = { DEBUG = true }
+# stubPath = "src/stubs"
+useLibraryCodeForTypes = true
+
+# strict = ["code"]
+typeCheckingMode = "standard"
+
+pythonVersion = "3.13"
+pythonPlatform = "Darwin"
+
+executionEnvironments = [
+    { root = "comosoco" },
+]
+
+# reportGeneralTypeIssues = "error"
+reportMissingImports = "error"
+# reportMissingTypeStubs = true
+reportUnusedImport = "information"
+reportUnusedClass = "error"
+reportUnusedFunction = "warning"
+# reportUnusedVariable = "information"
+# reportUnboundVariable = "information"
+### memo ###
+reportUnusedVariable = "none"
+reportUnboundVariable = "none"
+reportGeneralTypeIssues = "none"
+reportUndefinedVariable = "none"
+reportInvalidTypeForm = "none"
+reportAttributeAccessIssue = "none"
+reportIndexIssue = "none"
+reportCallIssue = "none"
