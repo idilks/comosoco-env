@@ -19,7 +19,7 @@ brew --version
 ```
 
 <details>
-  <summary>I can't or don't want to use `homebrew`!</summary>
+  <summary>I can't or don't want to use homebrew!</summary>
   No problem, it just makes it easier to install and remove things on MacOS.
 </details>
 
@@ -44,9 +44,10 @@ git --version
 ```
 
 <details>
-  <summary>I can't or don't want to use `git`!</summary>
-  But `git` is great! OK, though, you can skip it for now and download the repository directly as a ZIP file (see "Getting the Repository" section below).
+  <summary>I can't or don't want to use git!</summary>
+  But git is great! Ok, though, you can skip it for now and download the repository directly as a ZIP file (see "Getting the Repository" section below).
 </details>
+
 
 ### Install `uv`
 
@@ -69,7 +70,7 @@ uv --version
 ```
 
 <details>
-  <summary>I can't or don't want to use `uv`!</summary>
+  <summary>I can't or don't want to use uv!</summary>
   Ok, we can work around that.
 </details>
 
@@ -92,9 +93,10 @@ Follow the installation instructions on <https://taskfile.dev/installation/>
 task --version
 ```
 <details>
-  <summary>I can't or don't want to use `Task`!</summary>
+  <summary>I can't or don't want to use Task!</summary>
   No problem, it's just for convenience.
 </details>
+
 
 ### Install Visual Studio Code
 
@@ -104,7 +106,7 @@ VS Code is the recommended editor for this course:
 2. Install the downloaded file
 
 <details>
-  <summary>I can't or don't want to use `VS Code`!</summary>
+  <summary>I can't or don't want to use VS Code!</summary>
   You can use any editor that supports Jupyter notebooks, but this README only gives instructions for VS Code.
 </details>
 
@@ -152,15 +154,16 @@ task install
 uv sync
 ```
 
-**Option 3: Using `pip`**
+<details>
+  <summary>Option 3: Using pip</summary>
 
-Make a virtual environment:
+1, Make a virtual environment:
 
 ```bash
 python -m venv .venv
 ```
 
-Activate the environment:
+2. Activate the environment:
 
 MacOS/Linux:
 
@@ -169,30 +172,37 @@ source .venv/bin/activate
 ```
 
 Windows (Command Prompt):
+
 ```cmd
 .venv\Scripts\activate.bat
 ```
 
 Windows (PowerShell):
+
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
-Install packages:
+3. Install packages:
+
 ```bash
 pip install -r requirements-standard.txt
 ```
 
 If you encounter issues, try using `requirements-minimal.txt` instead:
+
 ```bash
 pip install -r requirements-minimal.txt
 ```
+
+</details>
+
 
 ### Setting up `VS Code`
 
 1. Open the VS Code application
 2. Open `VSCProject.code-workspace`
-3. When prompted, ==install recommended extensions==
+3. When prompted, **install recommended extensions**
 4. Open `comosoco/installation-test.ipynb`
 5. Set the Jupyter notebook to use the `.venv` python in `comosoco-env`
 6. Run all cells in the notebook - if they complete without error, your setup is working!
