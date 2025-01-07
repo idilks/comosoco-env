@@ -155,7 +155,7 @@ uv sync
 ```
 
 <details>
-  <summary>Option 3: Using pip</summary>
+  <summary><strong>Option 3: Using <code>pip</code></strong></summary>
 
 1, Make a virtual environment:
 
