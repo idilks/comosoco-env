@@ -1,198 +1,207 @@
-# Computational Models of Social Cognition (CoMoSoCo) - PPL Environment
+# Computational Models of Social Cognition (CoMoSoCo) - Python Environment
+
+This repository contains a starter Python environment for running Jupyter notebooks used in the Computational Models of Social Cognition course. 
 
 ## Environment Setup
 
-This project uses a virtual environment to manage dependencies. I recommend using a tool like `uv` from Astral for creating and managing these environments.  There are three primary ways to initialize the environment:
+For this course, you need a Python environment that lets you run Jupyter Notebooks with `memo` models. While this guide suggests creating an environment that matches the one I'll be using for the tutorials, you can also use a more minimal setup. As long as you can successfully run notebooks like [`comosoco/installation-test.ipynb`](./comosoco/installation-test.ipynb), your setup should be sufficient.
 
-1.  **Using Taskfile (Recommended for speed and convenience):** This method leverages `Taskfile` for streamlined setup.
-2.  **Manually with `uv` and VS Code:** This approach uses `uv` directly and integrates with VS Code.
-3.  **Minimal Dependencies and Cross-Platform:** This method uses only built in tooling and can be used in the widest variety of use-cases, but sacrifices some speed and convenience.
+### Install `Homebrew` (MacOS only)
 
-Choose the option that best suits your workflow.
+> [Homebrew](https://brew.sh/) is a package manager for MacOS that simplifies software installation and management.
 
-### Option 1: Using Taskfile (Recommended)
+Follow the installation instructions on [https://brew.sh](https://brew.sh)
 
-This is the recommended method for quickly setting up the development environment. It automates the process using `Taskfile`, a task runner that simplifies common development tasks.
+**Verify the installation:**
 
-#### Prerequisites
+```bash
+brew --version
+```
 
-1.  **Install VS Code:** Download and install VS Code from the official website: [https://code.visualstudio.com/](https://code.visualstudio.com/)
-2.  **Install `uv`:** `uv` is a fast Python package installer and resolver, and can be used to create and manage virtual environments. You can install it using various package managers. For example, using `brew` (macOS):
+<details>
+  <summary>I can't or do want to use `homebrew`!</summary>
+  No problem, it just makes it easier to install and remove things on MacOS.
+</details>
 
-    ```bash
-    brew install uv
-    ```
+### Install `git`
 
-    For other installation methods, see the `uv` documentation: [https://astral.sh/blog/uv/](https://astral.sh/blog/uv/)
-3.  **Install `Task`:** `Task` is a task runner/build tool. Install it using `brew` (macOS):
+> [git](https://git-scm.com/) is a version control system that helps manage code. Here's how to install it:
 
-    ```bash
-    brew install go-task/tap/go-task
-    ```
+**With Homebrew:**
 
-    For other installation methods, see the `Task` documentation: [https://taskfile.dev/installation/](https://taskfile.dev/installation/)
+```bash
+brew install git
+```
 
-#### Steps
+**Without Homebrew:**
 
-1.  **Instantiate `uv` Environment:** Run the following command in your terminal in the root directory of this project to create and populate the virtual environment based on instructions in `Taskfile.yml`. The `Taskfile.yml` file automatically uses `uv` under the hood.
+Follow the installation instructions on [https://git-scm.com/download/win](https://git-scm.com/download/win)
 
-    ```bash
-    task install
-    ```
+**Verify the installation:**
 
-    This command will:
-    *   Create a virtual environment in a `.venv` directory if it doesn't exist.
-    *   Install all necessary packages listed in the `requirements.txt` file.
-    *   Install the local package in editable mode (changes to the project code are immediately reflected in the virtual environment).
+```bash
+git --version
+```
 
-2.  **Open the Project in VS Code:**
+<details>
+  <summary>I can't or do want to use `git`!</summary>
+  But `git` is great! OK, though, you can skip it for now and download the repository directly as a ZIP file (see "Getting the Repository" section below).
+</details>
 
-    *   Open the project in VS Code by double-clicking the `VSCProject.code-workspace` file (if it exists), or by opening the project folder from within VS Code (File -> Open Folder...).
+### Install `uv`
 
-3.  **Install Recommended Extensions:**
+> [Astral uv](https://docs.astral.sh/uv/) is a fast Python package installer that we'll use to set up the environment.
 
-    *   VS Code will likely prompt you to install recommended extensions. Click "Install" to install them. These extensions provide helpful features for Python development. If you don't get prompted, you can manually install them by going to the Extensions tab (Ctrl+Shift+X or Cmd+Shift+X) and searching for the extensions listed in the `.vscode/extensions.json` file.
+**With Homebrew:**
 
-4.  **Test the Installation:**
+```bash
+brew install uv
+```
 
-    *   Open the `installation-test.ipynb` notebook in VS Code.
-    *   In the top-right corner of the notebook, ensure that the kernel is set to the `.venv` virtual environment. If not, click on the kernel selector and choose the correct environment (it should be listed as `.venv` or have a path containing `.venv`).
-    *   Run all cells in the notebook (click the "Run All" button or press Shift+Enter in each cell).
+**Without Homebrew:**
 
-If all cells execute without errors, your environment is set up correctly.
+Follow the install instructions on <https://docs.astral.sh/uv/getting-started/installation/>
 
-### Option 2: Manually with `uv` and VS Code
+**Verify the installation:**
 
-This method outlines the steps for manually creating and activating the virtual environment using `uv` without relying on `Taskfile`.
+```bash
+uv --version
+```
 
-#### Prerequisites
+<details>
+  <summary>I can't or do want to use `uv`!</summary>
+  Ok, we can work around that.
+</details>
 
-1.  **Install VS Code:** Download and install VS Code from the official website: [https://code.visualstudio.com/](https://code.visualstudio.com/)
-2.  **Install `uv`:** Follow the installation instructions for `uv` provided in Option 1.
+### Install `Task` (MacOS only)
 
-#### Steps
+> [Task](https://taskfile.dev/) is a task runner that simplifies common commands. While Task is not specific to MacOS, at the moment this repository only supports Task on MacOS.
 
-1.  **Create the Virtual Environment:**
+**With Homebrew:**
+```bash
+brew install go-task
+```
 
-    ```bash
-    uv venv
-    ```
+**Without Homebrew:**
 
-    This command creates a new virtual environment in the `.venv` directory.
+Follow the installation instructions on <https://taskfile.dev/installation/>
 
-2.  **Install Packages:**
-    ```bash
-    uv pip install -r requirements.txt
-    ```
+**Verify the installation:**
 
-    This command installs the project's dependencies into the newly created environment.
+```bash
+task --version
+```
+<details>
+  <summary>I can't or do want to use `Task`!</summary>
+  No problem, it's just for convenience.
+</details>
 
-3. **Install the local package in editable mode:**
-    ```bash
-    uv pip install -e .
-    ```
-    This installs the current package in editable mode. If the code is modified, the changes will immediately be available in the virtual environment.
+### Install Visual Studio Code
 
-4.  **Activate the Environment (Optional, but recommended):**
-    While not strictly necessary for running code within VS Code (which can handle environment selection automatically), activating the environment in your terminal is useful for running scripts from the command line.
-    *   **macOS/Linux:**
+VS Code is the recommended editor for this course:
 
-        ```bash
-        source .venv/bin/activate
-        ```
+1. Download VS Code from [https://code.visualstudio.com](https://code.visualstudio.com)
+2. Install the downloaded file
 
-    *   **Windows (PowerShell):**
+<details>
+  <summary>I can't or do want to use `VS Code`!</summary>
+  You can use any editor that supports Jupyter notebooks, but this README only gives instructions for VS Code.
+</details>
 
-        ```powershell
-        .venv\Scripts\Activate.ps1
-        ```
+### Clone this repository
 
-    *   **Windows (cmd):**
+Choose one of these methods:
 
-        ```cmd
-        .venv\Scripts\activate.bat
-        ```
+**Option 1: Fork and Clone (Recommended)**
+1. Create a GitHub account if you don't have one
+2. Go to this repository [https://github.com/daeh/comosoco-env](https://github.com/daeh/comosoco-env)
+3. Click the "Fork" button in the top-right corner
+4. Clone your fork:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/comosoco-env.git
+   cd comosoco-env
+   ```
 
-5.  **Open the Project in VS Code:** Follow the same instructions as in Option 1, steps 2-4. When selecting the kernel in VS Code, choose the `.venv` environment.
+**Option 2: Direct Clone**
+```bash
+git clone https://github.com/daeh/comosoco-env.git
+cd comosoco-env
+```
 
-### Option 3: Minimal Dependencies and Cross-Platform (venv)
+**Option 3: Direct Download**
 
-This method prioritizes minimal dependencies and maximum cross-platform compatibility by using only Python's built-in `venv` module. This will allow you to run your code on machines that don't have `uv` or `Taskfile` installed.
+1. Visit [https://github.com/daeh/comosoco-env](https://github.com/daeh/comosoco-env)
+2. Click the green "Code" button
+3. Select "Download ZIP"
+4. Extract the ZIP file
+5. Navigate to the `comosoco-env` folder in your terminal
 
-#### Prerequisites
+### Installing the Environment
 
-1.  **Python 3:** Ensure that Python 3 is installed on your system. You can check by running `python3 --version` or `python --version` in your terminal.
+Make sure you're in the `comosoco-env` directory, then choose one method:
 
-#### Steps
+**Option 1: Using `Task` (Easiest, MacOS)**
 
-1.  **Create the Virtual Environment:**
+```bash
+task install
+```
 
-    ```bash
-    python3 -m venv .venv
-    ```
+**Option 2: Using `uv`**
 
-    or, on some systems:
+```bash
+uv sync
+```
 
-    ```bash
-    python -m venv .venv
-    ```
+**Option 3: Using `pip`**
 
-    This command creates a new virtual environment in the `.venv` directory using Python's built-in `venv` module.
+Make a virtual environment:
 
-2.  **Activate the Environment:**
+```bash
+python -m venv .venv
+```
 
-    *   **macOS/Linux:**
+Activate the environment:
 
-        ```bash
-        source .venv/bin/activate
-        ```
+MacOS/Linux:
 
-    *   **Windows (PowerShell):**
+```bash
+source .venv/bin/activate
+```
 
-        ```powershell
-        .venv\Scripts\Activate.ps1
-        ```
+Windows (Command Prompt):
+```cmd
+.venv\Scripts\activate.bat
+```
 
-    *   **Windows (cmd):**
+Windows (PowerShell):
+```powershell
+.venv\Scripts\Activate.ps1
+```
 
-        ```cmd
-        .venv\Scripts\activate.bat
-        ```
+Install packages:
+```bash
+pip install -r requirements-standard.txt
+```
 
-3.  **Install Packages:**
+If you encounter issues, try using `requirements-minimal.txt` instead:
+```bash
+pip install -r requirements-minimal.txt
+```
 
-    ```bash
-    python3 -m pip install -r requirements.txt
-    ```
-    or, on some systems:
+### Setting up `VS Code`
 
-    ```bash
-    python -m pip install -r requirements.txt
-    ```
+1. Open the VS Code application
+2. Open `VSCProject.code-workspace`
+3. When prompted, ==install recommended extensions==
+4. Open `comosoco/installation-test.ipynb`
+5. Set the Jupyter notebook to use the `.venv` python in `comosoco-env`
+6. Run all cells in the notebook - if they complete without error, your setup is working!
 
-    This command installs the project's dependencies into the virtual environment using `pip`.
+![1](assets/1.png)
 
-4. **Install the local package in editable mode:**
-    ```bash
-    python3 -m pip install -e .
-    ```
-    or, on some systems:
+![2](assets/2.png)
 
-    ```bash
-    python -m pip install -e .
-    ```
+![3](assets/3.png)
 
-    This installs the current package in editable mode. If the code is modified, the changes will immediately be available in the virtual environment.
-
-5.  **Using the Environment:**
-
-    *   You can now run Python scripts and notebooks within this environment.
-    *   If you're using an IDE like VS Code, you can set the Python interpreter to the `.venv` directory. In VS Code, open the command palette (Ctrl+Shift+P or Cmd+Shift+P) and search for "Python: Select Interpreter". Choose the interpreter path that points to your `.venv` environment.
-    *   To test the installation, you can run the `installation-test.ipynb` notebook as described in previous sections. Make sure to select the correct kernel (the `.venv` environment).
-
-## Troubleshooting
-
-*   **Kernel Selection Issues:** If you encounter problems running the `installation-test.ipynb` notebook, double-check that the correct kernel is selected in VS Code.
-*   **Dependency Conflicts:** If you face dependency conflicts, try recreating the virtual environment from scratch using the instructions above.
-*   **Permission Errors:** If you get permission errors during installation, ensure you have the necessary permissions to write to the project directory and the virtual environment directory.
+![4](assets/4.png)
 
