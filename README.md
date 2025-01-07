@@ -19,7 +19,7 @@ brew --version
 ```
 
 <details>
-  <summary>I can't or do want to use `homebrew`!</summary>
+  <summary>I can't or don't want to use `homebrew`!</summary>
   No problem, it just makes it easier to install and remove things on MacOS.
 </details>
 
@@ -44,7 +44,7 @@ git --version
 ```
 
 <details>
-  <summary>I can't or do want to use `git`!</summary>
+  <summary>I can't or don't want to use `git`!</summary>
   But `git` is great! OK, though, you can skip it for now and download the repository directly as a ZIP file (see "Getting the Repository" section below).
 </details>
 
@@ -69,7 +69,7 @@ uv --version
 ```
 
 <details>
-  <summary>I can't or do want to use `uv`!</summary>
+  <summary>I can't or don't want to use `uv`!</summary>
   Ok, we can work around that.
 </details>
 
@@ -92,7 +92,7 @@ Follow the installation instructions on <https://taskfile.dev/installation/>
 task --version
 ```
 <details>
-  <summary>I can't or do want to use `Task`!</summary>
+  <summary>I can't or don't want to use `Task`!</summary>
   No problem, it's just for convenience.
 </details>
 
@@ -104,7 +104,7 @@ VS Code is the recommended editor for this course:
 2. Install the downloaded file
 
 <details>
-  <summary>I can't or do want to use `VS Code`!</summary>
+  <summary>I can't or don't want to use `VS Code`!</summary>
   You can use any editor that supports Jupyter notebooks, but this README only gives instructions for VS Code.
 </details>
 
