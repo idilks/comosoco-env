@@ -1,11 +1,14 @@
 version: '3'
 
+### TODO: update to support windows, e.g. https://github.com/joelvaneenwyk/win-flex-bison/blob/df95183c0af4ddf8a1d7a1018e9aac74c2cb9f8c/taskfile.yml#L115
+
 vars:
   VENV_DIR: '.venv'
   PRIOR_ENV_LOCKS_DIR: '_prior_environments'
   SRC_DIR: 'comosoco'
 
 tasks:
+
   check-installable:
     internal: true
     preconditions:
@@ -93,6 +96,7 @@ tasks:
     aliases: [env-install]
     deps: [check-installable]
     prompt: Install python virtual env (will overwrite any existing env)?
+    platforms: [darwin, linux]
     vars:
       DATE_STR_DEFAULT: '$(date +%Y-%m-%d)'
       DATE_STR: '{{default .DATE_STR_DEFAULT .DATE_STR}}'
